@@ -1,6 +1,22 @@
 import sqlite3
 import pandas as pd
 
+class location:
+
+    def __init__(self, database):
+        self.database = database
+        self.conn = sqlite3.connect(self.database)
+        self.cur = self.conn.cursor()
+
+    def addLocation(self):
+        locations = ["Temple", "Riesel"]
+        for loc in locations:
+            self.cur.execute("""Insert INTO Location (
+                                   Location)
+                                   Values (?)""",(
+                                       loc,)
+                                    )
+            self.conn.commit()
 class plotCorners:
     
     def __init__(self, database):
@@ -9,42 +25,70 @@ class plotCorners:
         self.cur = self.conn.cursor()
     
     def addPlotsAndCorners(self, filepath):
+        corners_df = pd.read_csv(filepath)
         plots = []
         blocks = []
         plot_id = []
-        for block_num in range(1, 7):
-            for plt_num in range(1, 21):
-                plot = 100 * block_num + plt_num
-                plots.append(plot)
-                blocks.append(block_num)
-        for i in range(1, 121):
-            plot_id.append(i)
-            plot_dic = {'Plot' : plots,
-                        'Block' : blocks,
-                        'Plot_id' : plot_id}
+        location_ids = []
+        str_check = str(corners_df.iloc[0,4])
+        print(str_check)
+        if str_check[0] == str("3"):
+            for block_num in range(1, 7):
+                for plt_num in range(1, 21):
+                    plot = 100 * block_num + plt_num
+                    plots.append(plot)
+                    blocks.append(block_num)
+                    location_ids.append(1)
+            for i in range(1, 121):
+                plot_id.append(i)
+                plot_dic = {'Plot' : plots,
+                            'Block' : blocks,
+                            'Plot_id' : plot_id,
+                            'Location_id' : location_ids}
+        elif str_check[0] == str("7"):
+            for block_num in range(1, 7):
+                for plt_num in range(1, 21):
+                    plot = 100 * block_num + plt_num
+                    plots.append(plot)
+                    blocks.append(block_num)
+                    location_ids.append(2)
+            for i in range(1, 121):
+                plot_id.append(i)
+        plot_dic = {'Plot' : plots,
+                    'Block' : blocks,
+                    'Plot_id' : plot_id,
+                    'Location_id' : location_ids}
         plot_df = pd.DataFrame(data = plot_dic)
-        corners_df = pd.read_csv(filepath)
         ids = []
+        loc_ids = []
         for record in corners_df.index:
             for entry_i in plot_df.index:
                 if corners_df.iloc[record]['Plot'] == plot_df.iloc[entry_i]['Plot']:
                     id = plot_df.iloc[entry_i]['Plot_id']
                     ids.append(id)
+            if str_check[0] == str("3"):
+                loc_ids.append(1)
+            elif str_check[0] == str("7"):
+                loc_ids.append(2)
         corners_df['Plot_id'] = ids
+        corners_df['Location_id'] = loc_ids
         corners_df.drop(labels = ['Plot'], axis = 1, inplace = True)
         plot_df.drop(labels = ['Plot_id'], axis = 1, inplace = True)
-        corners_df = corners_df.iloc[:, [7, 0, 1, 2, 3, 4, 5, 6]]
+        corners_df = corners_df.iloc[:, [7, 8, 0, 1, 2, 3, 4, 5, 6]]
         plot_df['Plot_only'] = (plot_df['Plot'] - (100 * plot_df['Block']))
         for x in range(len(plot_df)):
             plt_num = int(plot_df.iloc[x]['Plot'])
             blck = int(plot_df.iloc[x]['Block'])
             plot = int(plot_df.iloc[x]['Plot_only'])
+            loc_id = int(plot_df.iloc[x]['Location_id'])
             self.cur.execute('''INSERT INTO Plots (
                         Plot_Number,
+                        Location_id,
                         Block,
                         Plot)
-                        VALUES (?, ?, ?)''', (
+                        VALUES (?, ?, ?, ?)''', (
                         plt_num,
+                        loc_id,
                         blck,
                         plot,)
                         )
@@ -57,8 +101,10 @@ class plotCorners:
             nort = corners_df.iloc[y]['Northing']
             east = corners_df.iloc[y]['Easting']
             elev = corners_df.iloc[y]['Elevation']
+            loc = int(corners_df.iloc[y]['Location_id'])
             self.cur.execute('''INSERT INTO Plot_Corners (
                         Plot_id,
+                        Location_id,
                         Name,
                         Code,
                         Latitude,
@@ -66,8 +112,9 @@ class plotCorners:
                         Northing,
                         Easting,
                         Elevation)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)''', (
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)''', (
                         plt_id,
+                        loc,
                         name,
                         code,
                         lati,

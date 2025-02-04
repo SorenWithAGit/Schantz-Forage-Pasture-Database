@@ -7,8 +7,14 @@ class createDatabase:
         self.conn = sqlite3.connect(self.database)
         self.cur = self.conn.cursor()
         self.cur.executescript('''
+            CREATE TABLE Location (
+            id integer PRIMARY KEY,
+            Location TEXT,
+            CONSTRAINT Location UNIQUE (Location) );
+
             CREATE TABLE Plots (
             id INTEGER PRIMARY KEY,
+            Location_id INTEGER REFERENCES Location (id),
             Plot_Number INTEGER,
             Block INTEGER,
             Plot INTEGER );
@@ -16,6 +22,7 @@ class createDatabase:
             Create Table Plot_Corners (
             id INTEGER PRIMARY KEY,
             Plot_id INTEGER REFERENCES Plots (id),
+            Location_id INTEGER REFERENCES Location (id),
             Name INTEGER,
             Code TEXT,
             Latitude FLOAT,
@@ -40,6 +47,7 @@ class createDatabase:
             CREATE TABLE Sampling_Dates (
             id INTEGER PRIMARY KEY,
             Plots_id INTEGER REFERENCES Plots (id),
+            Location_id INTEGER REFERENCES Location (id),
             Treatments_id INTEGER REFERENCES Treatments (id),
             Season_id INTEGER REFERENCES Season (id),
             Sample_Date TEXT );
@@ -47,6 +55,7 @@ class createDatabase:
             CREATE TABLE Sampling_Points (
             id INTEGER PRIMARY KEY,
             Plots_id INTEGER REFERENCES Plots (id),
+            Location_id INTEGER REFERENCES Location (id),
             Treatments_id INTEGER REFERENCES Treatments (id),
             Sample_Date_id INTEGER REFERENCES Sample_date (id),
             latitude FLOAT,
@@ -58,6 +67,7 @@ class createDatabase:
             CREATE TABLE Soil_Moisture (
             id INTEGER PRIMARY KEY,
             Plots_id INTEGER REFERENCES Plots (id),
+            Location_id INTEGER REFERENCES Location (id),
             Treatments_id INTEGER REFERENCES Treatments (id),
             Sample_Date_id INTGER REFERENCES Sample_Date (id),
             Season_id INTEGER REFERENCES Season (id),
@@ -68,6 +78,7 @@ class createDatabase:
             CREATE TABLE Plant_Data (
             id INTEGER PRIMARY KEY,
             Plots_id INTEGER REFERENCES Plots (id),
+            Location_id INTEGER REFERENCES Location (id),
             Treatments_id INTEGER REFERENCES Treatments (id),
             Sample_Date_id INTGER REFERENCES Sample_Date (id),
             Season_id INTEGER REFERENCES Season (id),
@@ -80,6 +91,7 @@ class createDatabase:
             CREATE TABLE Root_Scan_Samples (
             id INTEGER PRIMARY KEY,
             Plots_id INTEGER REFERENCES Plots (id),
+            Location_id INTEGER REFERENCES Location (id),
             Treatments_id INTEGER REFERENCES Treatments (id),
             Sample_Date_id INTEGER REFERENCES Sample_Date (id),
             Season_id INTEGER REFERENCES Season (id),
@@ -89,6 +101,7 @@ class createDatabase:
             id INTEGER PRIMARY KEY,
             Root_Scan_Samples_id INTEGER REFERENCES Root_Scan_Samples (id),
             Plots_id INTEGER REFERENCES Plots (id),
+            Location_id INTEGER REFERENCES Location (id),
             Treatments_id INTEGER REFERENCES Treatments (id),
             Sample_Date_id INTEGER REFERENCES Sample_Date (id),
             Season_id INTEGER REFERENCES Season (id),
