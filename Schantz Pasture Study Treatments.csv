@@ -1,0 +1,121 @@
+﻿Plot,Plots_id,Seeding,Fert. Treatment,Till. Treatment
+1-1,1,Fallow,1/2 Synthetic,No Till
+1-2,2,Moderate,1/2 Synthetic,No Till
+1-3,3,Full,1/2 Synthetic,No Till
+1-4,4,Limited,1/2 Synthetic,No Till
+1-5,5,Fallow,Full Manure,No Till
+1-6,6,Moderate,Full Manure,No Till
+1-7,7,Full,Full Manure,No Till
+1-8,8,Limited,Full Manure,No Till
+1-9,9,Fallow,Control,No Till
+1-10,10,Moderate,Control,No Till
+1-11,11,Full,Control,No Till
+1-12,12,Limited,Control,No Till
+1-13,13,Fallow,Full Synthetic,No Till
+1-14,14,Moderate,Full Synthetic,No Till
+1-15,15,Full,Full Synthetic,No Till
+1-16,16,Limited,Full Synthetic,No Till
+1-17,17,Fallow,1/2 Manure,No Till
+1-18,18,Moderate,1/2 Manure,No Till
+1-19,19,Full,1/2 Manure,No Till
+1-20,20,Limited,1/2 Manure,No Till
+2-1,21,Limited,1/2 Manure,No Till
+2-2,22,Fallow,1/2 Manure,No Till
+2-3,23,Moderate,1/2 Manure,No Till
+2-4,24,Full,1/2 Manure,No Till
+2-5,25,Limited,Full Synthetic,No Till
+2-6,26,Fallow,Full Synthetic,No Till
+2-7,27,Moderate,Full Synthetic,No Till
+2-8,28,Full,Full Synthetic,No Till
+2-9,29,Limited,Full Manure,No Till
+2-10,30,Fallow,Full Manure,No Till
+2-11,31,Moderate,Full Manure,No Till
+2-12,32,Full,Full Manure,No Till
+2-13,33,Limited,1/2 Synthetic,No Till
+2-14,34,Fallow,1/2 Synthetic,No Till
+2-15,35,Moderate,1/2 Synthetic,No Till
+2-16,36,Full,1/2 Synthetic,No Till
+2-17,37,Limited,Control,No Till
+2-18,38,Fallow,Control,No Till
+2-19,39,Moderate,Control,No Till
+2-20,40,Full,Control,No Till
+3-1,41,Fallow,Full Synthetic,No Till
+3-2,42,Moderate,Full Synthetic,No Till
+3-3,43,Limited,Full Synthetic,No Till
+3-4,44,Full,Full Synthetic,No Till
+3-5,45,Fallow,Full Manure,No Till
+3-6,46,Moderate,Full Manure,No Till
+3-7,47,Limited,Full Manure,No Till
+3-8,48,Full,Full Manure,No Till
+3-9,49,Fallow,1/2 Manure,No Till
+3-10,50,Moderate,1/2 Manure,No Till
+3-11,51,Limited,1/2 Manure,No Till
+3-12,52,Full,1/2 Manure,No Till
+3-13,53,Fallow,1/2 Synthetic,No Till
+3-14,54,Moderate,1/2 Synthetic,No Till
+3-15,55,Limited,1/2 Synthetic,No Till
+3-16,56,Full,1/2 Synthetic,No Till
+3-17,57,Fallow,Control,No Till
+3-18,58,Moderate,Control,No Till
+3-19,59,Limited,Control,No Till
+3-20,60,Full,Control,No Till
+4-1,61,Full,Full Manure,No Till
+4-2,62,Fallow,Full Manure,No Till
+4-3,63,Moderate,Full Manure,No Till
+4-4,64,Limited,Full Manure,No Till
+4-5,65,Full,Control,No Till
+4-6,66,Fallow,Control,No Till
+4-7,67,Moderate,Control,No Till
+4-8,68,Limited,Control,No Till
+4-9,69,Full,1/2 Manure,No Till
+4-10,70,Fallow,1/2 Manure,No Till
+4-11,71,Moderate,1/2 Manure,No Till
+4-12,72,Limited,1/2 Manure,No Till
+4-13,73,Full,Full Synthetic,No Till
+4-14,74,Fallow,Full Synthetic,No Till
+4-15,75,Moderate,Full Synthetic,No Till
+4-16,76,Limited,Full Synthetic,No Till
+4-17,77,Full,1/2 Synthetic,No Till
+4-18,78,Fallow,1/2 Synthetic,No Till
+4-19,79,Moderate,1/2 Synthetic,No Till
+4-20,80,Limited,1/2 Synthetic,No Till
+5-1,81,Full,Full Manure,No Till
+5-2,82,Limited,Full Manure,No Till
+5-3,83,Fallow,Full Manure,No Till
+5-4,84,Moderate,Full Manure,No Till
+5-5,85,Full,1/2 Manure,No Till
+5-6,86,Limited,1/2 Manure,No Till
+5-7,87,Fallow,1/2 Manure,No Till
+5-8,88,Moderate,1/2 Manure,No Till
+5-9,89,Full,Control,No Till
+5-10,90,Limited,Control,No Till
+5-11,91,Fallow,Control,No Till
+5-12,92,Moderate,Control,No Till
+5-13,93,Full,Full Synthetic,No Till
+5-14,94,Limited,Full Synthetic,No Till
+5-15,95,Fallow,Full Synthetic,No Till
+5-16,96,Moderate,Full Synthetic,No Till
+5-17,97,Full,1/2 Synthetic,No Till
+5-18,98,Limited,1/2 Synthetic,No Till
+5-19,99,Fallow,1/2 Synthetic,No Till
+5-20,100,Moderate,1/2 Synthetic,No Till
+6-1,101,Fallow,Control,No Till
+6-2,102,Moderate,Control,No Till
+6-3,103,Limited,Control,No Till
+6-4,104,Full,Control,No Till
+6-5,105,Fallow,1/2 Synthetic,No Till
+6-6,106,Moderate,1/2 Synthetic,No Till
+6-7,107,Limited,1/2 Synthetic,No Till
+6-8,108,Full,1/2 Synthetic,No Till
+6-9,109,Fallow,Full Synthetic,No Till
+6-10,110,Moderate,Full Synthetic,No Till
+6-11,111,Limited,Full Synthetic,No Till
+6-12,112,Full,Full Synthetic,No Till
+6-13,113,Fallow,1/2 Manure,No Till
+6-14,114,Moderate,1/2 Manure,No Till
+6-15,115,Limited,1/2 Manure,No Till
+6-16,116,Full,1/2 Manure,No Till
+6-17,117,Fallow,Full Manure,No Till
+6-18,118,Moderate,Full Manure,No Till
+6-19,119,Limited,Full Manure,No Till
+6-20,120,Full,Full Manure,No Till
