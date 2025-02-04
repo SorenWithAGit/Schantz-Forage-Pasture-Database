@@ -1,28 +1,11 @@
 import sqlite3
 
-class database:
+class createDatabase:
     
     def __init__(self, database):
-        self.databse = database
-        conn = sqlite3.connect(self.database)
-        self.cur = conn.cursor()
-
-    def clear_tables(self):
-        self.cur.executescript("""
-            DROP TABLE IF EXISTS Plots;
-            DROP TABLE IF EXISTS Plot_Corners;
-            DROP TABLE IF EXISTS Season;
-            DROP TABLE IF EXISTS Treatments;
-            DROP TABLE IF EXISTS Sampling_Dates;
-            DROP TABLE IF EXISTS Sampling_Points;
-            DROP TABLE IF EXISTS Soil_Moisture;
-            DROP TABLE IF EXISTS Plant_Data;
-            DROP TABLE IF EXISTS Root_Scan_Samples;
-            DROP TABLE IF EXISTS Root_Scan_Data;
-            """)
-        self.conn.commit()
-    
-    def createDB(self):
+        self.database = database
+        self.conn = sqlite3.connect(self.database)
+        self.cur = self.conn.cursor()
         self.cur.executescript('''
             CREATE TABLE Plots (
             id INTEGER PRIMARY KEY,
@@ -174,4 +157,20 @@ class database:
             [.T.>4.5] FLOAT);
             ''')
         self.conn.commit()
+
+    def clear_tables(self):
+        self.cur.executescript("""
+            DROP TABLE IF EXISTS Plots;
+            DROP TABLE IF EXISTS Plot_Corners;
+            DROP TABLE IF EXISTS Season;
+            DROP TABLE IF EXISTS Treatments;
+            DROP TABLE IF EXISTS Sampling_Dates;
+            DROP TABLE IF EXISTS Sampling_Points;
+            DROP TABLE IF EXISTS Soil_Moisture;
+            DROP TABLE IF EXISTS Plant_Data;
+            DROP TABLE IF EXISTS Root_Scan_Samples;
+            DROP TABLE IF EXISTS Root_Scan_Data;
+            """)
+        self.conn.commit()
+    
 
