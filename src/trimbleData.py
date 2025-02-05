@@ -31,7 +31,6 @@ class plotCorners:
         plot_id = []
         location_ids = []
         str_check = str(corners_df.iloc[0,4])
-        print(str_check)
         if str_check[0] == str("3"):
             for block_num in range(1, 7):
                 for plt_num in range(1, 21):

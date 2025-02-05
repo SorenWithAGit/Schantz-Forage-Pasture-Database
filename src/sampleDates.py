@@ -58,7 +58,6 @@ class dates:
                                 plot_id = plots_df.iloc[ind]['id'] 
                                 Plots_ids.append(plot_id)
         date_df['Plots_id'] = Plots_ids
-        print(date_df)
         treatments_results = self.cur.execute(treatments_query).fetchall()
         treatments_df = pd.DataFrame(treatments_results, columns=[description[0] for description in self.cur.description])
         for x in date_df.index:

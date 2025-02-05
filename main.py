@@ -30,12 +30,12 @@ Datasheet = r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study
 # seas.addSeasons(Datasheet)
 
 # Add Sample Dates
-date = sampleDates.dates(DB)
-date.addDates(Datasheet)
+# date = sampleDates.dates(DB)
+# date.addDates(Datasheet)
 
 # Add Soil Moisture
-# sm = soilMoisture.soilMoisture(DB)
-# sm.addSoilMoisture(Datasheet)
+sm = soilMoisture.soilMoisture(DB)
+sm.addSoilMoisture(Datasheet)
 
 # Add Plant Data
 # plant = plantData.plantData(DB)
