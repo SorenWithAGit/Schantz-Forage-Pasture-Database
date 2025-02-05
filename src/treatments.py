@@ -12,16 +12,19 @@ class treatments:
         treatment_df = pd.read_csv(filename)
         for record in treatment_df.index:
             plot_id = int(treatment_df.iloc[record]['Plots_id'])
+            loc_id = int(treatment_df.iloc[record]['Location_id'])
             seeding = treatment_df.iloc[record]['Seeding']
             fert = treatment_df.iloc[record]['Fert. Treatment']
             till = treatment_df.iloc[record]['Till. Treatment']
             self.cur.execute('''INSERT INTO Treatments (
                         Plots_id,
+                        Location_id,
                         Seeding,
                         Fertilizer_Treatment,
                         Tillage_Treatment)
-                        VALUES (?, ?, ?, ?)''', (
+                        VALUES (?, ?, ?, ?, ?)''', (
                         plot_id,
+                        loc_id,
                         seeding,
                         fert,
                         till,)

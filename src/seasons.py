@@ -14,12 +14,15 @@ class seasons():
         for entry in year_season:
             year = entry.split(' ')[0]
             season = entry.split(' ')[1]
+            yearSeason = entry
             self.cur.execute('''INSERT INTO Season (
                         Year,
-                        Season)
-                        VALUES (?, ?)''', (
+                        Season,
+                        [Year/Season Mix])
+                        VALUES (?, ?, ?)''', (
                         year,
-                        season,)
+                        season,
+                        yearSeason,)
                        )
             self.conn.commit()
         

@@ -35,11 +35,13 @@ class createDatabase:
             id INTEGER PRIMARY KEY,
             Year INTEGER, 
             Season TEXT,
+            [Year/Season Mix] TEXT,
             CONSTRAINT Year_Season UNIQUE (Year,Season) );
 
             CREATE TABLE Treatments (
             id INTEGER PRIMARY KEY,
             Plots_id INTEGER REFERENCES Plots (id),
+            Location_id INTEGER REFERENCES Location (id),
             Seeding TEXT,
             Fertilizer_Treatment TEXT,
             Tillage_Treatment TEXT );
