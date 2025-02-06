@@ -136,6 +136,7 @@ class samplingPoints:
         sampling_points_df = pd.read_csv(csv)
         sample_dates = []
         plots = []
+        locations = []
         for record in sampling_points_df.index:
             point_seperated = str(sampling_points_df.iloc[record]['point_ID']).split('_')
             sample_date = point_seperated[0]
@@ -150,35 +151,53 @@ class samplingPoints:
         plots_query = '''SELECT * FROM Plots'''
         treatments_query = '''SELECT * FROM Treatments'''
         sample_date_query = '''SELECT * FROM Sampling_Dates'''
+        location_query = """SELECT * FROM Location"""
         plots_results = self.cur.execute(plots_query).fetchall()
         plots_df = pd.DataFrame(plots_results, columns=[description[0] for description in self.cur.description])
+        location_results = self.cur.execute(location_query).fetchall()
+        location_df = pd.DataFrame(location_results, columns = [description[0] for description in self.cur.description])
+        location_ids = []
         plots_ids = []
         Treatments_ids = []
         Sample_Date_ids = []
+        
+        for r in sampling_points_df.index:
+            if str(sampling_points_df.iloc[r]["easting"])[0] == '6':
+                location_ids.append(1)
+            elif str(sampling_points_df.iloc[r]["easting"])[0] == '7':
+                location_ids.append(2)
+        sampling_points_df["Location_id"] = location_ids
+
         for record in sampling_points_df.index:
             for ind in range(len(plots_df)):
-                if int(sampling_points_df.iloc[record]['Plot']) == int(plots_df.iloc[ind]['Plot_Number']):
+                if sampling_points_df.iloc[record]["Location_id"] == plots_df.iloc[ind]["Location_id"] and int(sampling_points_df.iloc[record]['Plot']) == int(plots_df.iloc[ind]['Plot_Number']):
                     plot_id = plots_df.iloc[ind]['id'] 
                     plots_ids.append(plot_id)
         sampling_points_df['Plots_id'] = plots_ids
+
         treatments_results = self.cur.execute(treatments_query).fetchall()
         treatments_df = pd.DataFrame(treatments_results, columns=[description[0] for description in self.cur.description])
         for x in sampling_points_df.index:
             for y in range(len(treatments_df)):
-                if sampling_points_df.iloc[x]['Plots_id'] == treatments_df.iloc[y]['Plots_id']:
+                if sampling_points_df.iloc[x]["Location_id"] == treatments_df.iloc[y]["Location_id"] and sampling_points_df.iloc[x]['Plots_id'] == treatments_df.iloc[y]['Plots_id']:
                     treatment_id = treatments_df.iloc[y]['id']
                     Treatments_ids.append(treatment_id)
         sampling_points_df['Treatments_id'] = Treatments_ids
+
         sample_date_results = self.cur.execute(sample_date_query).fetchall()
         sample_date_df = pd.DataFrame(sample_date_results, columns =[description[0] for description in self.cur.description])
         for date in sampling_points_df['Sample_Date'].index:
             for dte in sample_date_df.index:
-                if int(sampling_points_df.iloc[date]['Plots_id']) == int(sample_date_df.iloc[dte]['Plots_id']) and str(sampling_points_df.iloc[date]['Sample_Date']) == str(sample_date_df.iloc[dte]['Sample_Date']):
+                if sampling_points_df.iloc[date]["Location_id"] == sample_date_df.iloc[dte]["Location_id"] and int(sampling_points_df.iloc[date]['Plots_id']) == int(sample_date_df.iloc[dte]['Plots_id']) and str(sampling_points_df.iloc[date]['Sample_Date']) == str(sample_date_df.iloc[dte]['Sample_Date']):
                     sample_date_id = sample_date_df.iloc[dte]['id']
                     Sample_Date_ids.append(sample_date_id)
+                elif sampling_points_df.iloc[date]["Location_id"] == sample_date_df.iloc[dte]["Location_id"] and int(sampling_points_df.iloc[date]['Plots_id']) == int(sample_date_df.iloc[dte]['Plots_id']) and str(sampling_points_df.iloc[date]['Sample_Date']) == "nan":
+                    Sample_Date_ids.append("nan")
         sampling_points_df['Sample_Date_id'] = Sample_Date_ids
+
         for entry in sampling_points_df.index:
             plot_id = int(sampling_points_df.iloc[entry]['Plots_id'])
+            location_id = int(sampling_points_df.iloc[entry]["Location_id"])
             treat_id = int(sampling_points_df.iloc[entry]['Treatments_id'])
             smpl_id = int(sampling_points_df.iloc[entry]['Sample_Date_id'])
             lat = float(sampling_points_df.iloc[entry]['latitude'])
@@ -188,6 +207,7 @@ class samplingPoints:
             elev = float(sampling_points_df.iloc[entry]['elevation'])
             self.cur.execute('''INSERT INTO Sampling_Points (
                         Plots_id,
+                        Location_id,
                         Treatments_id,
                         Sample_Date_id,
                         latitude,
@@ -195,8 +215,9 @@ class samplingPoints:
                         northing,
                         easting,
                         elevation)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)''', (
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)''', (
                         plot_id,
+                        location_id,
                         treat_id,
                         smpl_id,
                         lat,

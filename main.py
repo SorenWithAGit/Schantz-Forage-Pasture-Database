@@ -38,8 +38,12 @@ Datasheet = r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study
 # sm.addSoilMoisture(Datasheet)
 
 # Add Plant Data
-plant = plantData.plantData(DB)
-plant.addData(Datasheet)
+# plant = plantData.plantData(DB)
+# plant.addData(Datasheet)
+
+# Add sampling Points
+points = trimbleData.samplingPoints(DB)
+points.addSamplingPoints(r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\GIS - Pasture Study Sampling Points\Riesel Sampling Points\RWi24_CSVFiles\RWi24_S2 Sampling Points.csv")
 
 
 
