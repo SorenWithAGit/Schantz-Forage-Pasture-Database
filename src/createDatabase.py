@@ -53,7 +53,7 @@ class createDatabase:
             Treatments_id INTEGER REFERENCES Treatments (id),
             Season_id INTEGER REFERENCES Season (id),
             Sample_Date TEXT,
-            CONSTRAINT id_Date UNIQUE (id, Sample_Date) );
+            CONSTRAINT Date UNIQUE (Sample_Date) );
         
             CREATE TABLE Sampling_Points (
             id INTEGER PRIMARY KEY,

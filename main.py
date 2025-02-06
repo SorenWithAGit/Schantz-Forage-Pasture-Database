@@ -50,5 +50,3 @@ Datasheet = r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study
 # rootscan = rootScan.rootScanData(DB, r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\Root Scans\Temple\TSu24_S4_rootscan\TSu24_S4_rootscan_processed.xlsx")
 # rootscan.addSamples()
 # rootscan.addResults()
-
-
