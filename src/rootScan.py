@@ -106,3 +106,23 @@ class rootScanData:
                         name,)
                        )
             self.conn.commit()
+
+    def addResults(self):
+        root_scan_df = self.rootScanDF
+        root_sample_query = "SELECT * FROM Root_Scan_Samples"
+        root_sample_df = self.cur.execute(root_sample_query).fetchall()
+        root_sample_df = pd.DataFrame(root_sample_df, columns =[description[0] for description in self.cur.description])
+        root_sample_ids = []
+        for ind in root_scan_df.index:
+            for i in root_sample_df.index:
+                if root_scan_df.iloc[ind]['Sample Id'] == root_sample_df.iloc[i]['Sample_Name']:
+                    root_id = root_sample_df.iloc[i]['id']
+                    root_sample_ids.append(root_id)
+        root_scan_df['Root_Scan_Samples_id'] = root_sample_ids
+        root_scan_df.drop(['Sample Id', 'Date', 'Seeding', 'Treatment', 'Location_identity', 'Location'], axis = 1, inplace = True)
+        root_scan_df = root_scan_df.iloc[:,[71, 67, 66, 69, 70, 68, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 
+                                            24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 
+                                            50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65]]
+        root_scan_df.drop(['Plot', 'Season', 'Year'], axis = 1, inplace = True)
+        root_scan_df.to_sql('Root_Scan_Data', self.conn, if_exists='append', index=False)
+        self.conn.commit()
