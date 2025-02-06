@@ -5,6 +5,7 @@ from src import seasons
 from src import sampleDates
 from src import soilMoisture
 from src import plantData
+from src import rootScan
 
 DB = "Schantz_Temple_Pasture_DB.sqlite"
 Datasheet = r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\Pasture Study Data, Weights, and Labels.xlsx"
@@ -42,8 +43,11 @@ Datasheet = r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study
 # plant.addData(Datasheet)
 
 # Add sampling Points
-points = trimbleData.samplingPoints(DB)
-points.addSamplingPoints(r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\GIS - Pasture Study Sampling Points\Riesel Sampling Points\RWi24_CSVFiles\RWi24_S2 Sampling Points.csv")
+# points = trimbleData.samplingPoints(DB)
+# points.addSamplingPoints(r)
 
+# Add Root Scanner Samples
+rootscan = rootScan.rootScanData(DB, r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\Root Scans\Temple\TSu24_S4_rootscan\TSu24_S4_rootscan_processed.xlsx")
+rootscan.addSamples()
 
 
