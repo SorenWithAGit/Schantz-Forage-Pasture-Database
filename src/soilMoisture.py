@@ -71,13 +71,12 @@ class soilMoisture:
 
         sample_date_results = self.cur.execute(sample_date_query).fetchall()
         sample_date_df = pd.DataFrame(sample_date_results, columns =[description[0] for description in self.cur.description])
-        for b in soil_m_df.index:
-            for d in range(len(sample_date_df)):
-                if soil_m_df.iloc[b]["Location_id"] == sample_date_df.iloc[d]["Location_id"] and str(soil_m_df.iloc[d]['Sample Date']) == str(sample_date_df.iloc[d]['Sample_Date']):
-                    sample_date_id = sample_date_df.iloc[d]['id']
-                        #sample_date = sample_date_df.iloc[d]['Sample_Date']
-                        #print('index = ' + str(soil_m_df.index.get_loc(d)) + ', Sample_date = ' + str(soil_m_df.iloc[d]['Sample Date']) + ' Sample_Date = ' + str(sample_date))
-                    Sample_Date_ids.append(sample_date_id)
+        for d in range(len(sample_date_df)):
+            if str(soil_m_df.iloc[d]['Sample Date']) == str(sample_date_df.iloc[d]['Sample_Date']):
+                sample_date_id = sample_date_df.iloc[d]['id']
+                    #sample_date = sample_date_df.iloc[d]['Sample_Date']
+                    #print('index = ' + str(soil_m_df.index.get_loc(d)) + ', Sample_date = ' + str(soil_m_df.iloc[d]['Sample Date']) + ' Sample_Date = ' + str(sample_date))
+                Sample_Date_ids.append(sample_date_id)
         soil_m_df['Sample_Date_id'] = Sample_Date_ids
 
         for record in soil_m_df.index:
