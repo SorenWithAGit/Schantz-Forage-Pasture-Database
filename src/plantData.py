@@ -85,7 +85,7 @@ class plantData:
             if str(grass_df.iloc[iter]['Grass Dry Weight (g)']) == '.' and \
             str(grass_df.iloc[iter]['Non-Grass Dry Weight (g)']) == '.' and \
             str(grass_df.iloc[iter]['Other Dry Weight (g)']) == '.' and \
-            str(grass_df.iloc[iter]['Litter Dry Weight (g)']) == '.' and \
+            str(grass_df.iloc[iter]['Litter Dry Weight (g)'])== '.' and \
             str(grass_df.iloc[iter]['Root Dry Weight (g)']) == '.':
                 weight_var = float('nan')
                 gd_corrected.append(weight_var)
@@ -93,12 +93,20 @@ class plantData:
                 od_corrected.append(weight_var)
                 ld_corrected.append(weight_var)
                 rd_corrected.append(weight_var)
+            elif str(grass_df.iloc[iter]["Root Dry Weight (g)"]) == "":
+                weight_var = float("nan")
+                rd_corrected.append(weight_var)
             else:
                 gd_corrected.append(grass_df.iloc[iter]['Grass Dry Weight (g)'])
                 ng_corrected.append(grass_df.iloc[iter]['Non-Grass Dry Weight (g)'])
                 od_corrected.append(grass_df.iloc[iter]['Other Dry Weight (g)'])
                 ld_corrected.append(grass_df.iloc[iter]['Litter Dry Weight (g)'])
-                rd_corrected.append(grass_df.iloc[iter]['Root Dry Weight (g)'])
+                if str(grass_df.iloc[iter]["Root Dry Weight (g)"]) == ".":
+                    weight_var = float("nan")
+                    rd_corrected.append(weight_var)
+                elif str(grass_df.iloc[iter]["Root Dry Weight (g)"]) != "." :
+                    rd_corrected.append(grass_df.iloc[iter]['Root Dry Weight (g)'])
+
         grass_df['Grass Dry Weight (g)'] = gd_corrected
         grass_df['Non-Grass Dry Weight (g)'] = ng_corrected
         grass_df['Other Dry Weight (g)'] = od_corrected

@@ -102,7 +102,7 @@ The addData function will read from the excel file tied to the
 variable Datasheet and adds the gravimetric values of each sampling 
 to the table Plant_Data.
 """
-### plant = plantData.plantData(DB)
+# plant = plantData.plantData(DB)
 # plant.addData(Datasheet)
 
 
