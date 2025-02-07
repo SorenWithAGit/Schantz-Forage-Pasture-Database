@@ -129,6 +129,6 @@ Names to the Table Root_Scan_Samples.
 The addResults function will take the DataFrame and add the measured
 values to the Table Root_Scan_Data.
 """
-# rootscan = rootScan.rootScanData(DB, r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\Root Scans\Temple\TSu24_S4_rootscan\TSu24_S4_rootscan_processed.xlsx")
+# rootscan = rootScan.rootScanData(DB, r)
 # rootscan.addSamples()
 # rootscan.addResults()
