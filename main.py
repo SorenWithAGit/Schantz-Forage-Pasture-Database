@@ -7,7 +7,7 @@ from src import soilMoisture
 from src import plantData
 from src import rootScan
 
-DB = "Schantz_Temple_Pasture_DB.sqlite"
+DB = "Schantz_Pasture_DB.sqlite"
 Datasheet = r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\Pasture Study Data, Weights, and Labels.xlsx"
 
 
