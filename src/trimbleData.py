@@ -136,7 +136,6 @@ class samplingPoints:
         sampling_points_df = pd.read_csv(csv)
         sample_dates = []
         plots = []
-        locations = []
         for record in sampling_points_df.index:
             point_seperated = str(sampling_points_df.iloc[record]['point_ID']).split('_')
             sample_date = point_seperated[0]
@@ -151,11 +150,10 @@ class samplingPoints:
         plots_query = '''SELECT * FROM Plots'''
         treatments_query = '''SELECT * FROM Treatments'''
         sample_date_query = '''SELECT * FROM Sampling_Dates'''
-        location_query = """SELECT * FROM Location"""
         plots_results = self.cur.execute(plots_query).fetchall()
         plots_df = pd.DataFrame(plots_results, columns=[description[0] for description in self.cur.description])
-        location_results = self.cur.execute(location_query).fetchall()
-        location_df = pd.DataFrame(location_results, columns = [description[0] for description in self.cur.description])
+
+
         location_ids = []
         plots_ids = []
         Treatments_ids = []
