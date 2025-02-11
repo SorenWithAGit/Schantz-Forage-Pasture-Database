@@ -46,8 +46,6 @@ class treatments:
                     Seasons_ids.append(season_id)
         treatment_df['Season_id'] = Seasons_ids
         treatment_df = treatment_df.iloc[:,[20, 19, 21, 0, 1, 2, 5, 6, 7]]
-        print(treatment_df)
-
 
         for record in treatment_df.index:
             plot_id = int(treatment_df.iloc[record]['Plots_id'])
