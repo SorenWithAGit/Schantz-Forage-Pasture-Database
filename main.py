@@ -55,8 +55,8 @@ The addTreatments function will read from a csv the treatments
 for the corresponding plots and adds the records to the Table
 Treatments
 """
-treat = treatments.treatments(DB)
-treat.addTreatments(Datasheet)
+# treat = treatments.treatments(DB)
+# treat.addTreatments(Datasheet)
 
 
 """
