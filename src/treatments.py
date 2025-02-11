@@ -45,28 +45,29 @@ class treatments:
                     season_id = seasons_df.iloc[s]['id']
                     Seasons_ids.append(season_id)
         treatment_df['Season_id'] = Seasons_ids
-        treatment_df = treatment_df.iloc[:,[20, 19, 21, 0, 1, 2, 5, 6, 7]]
+        treatment_df = treatment_df.iloc[:,[20, 19, 21, 0, 1, 2, 5, 6, 7, 8]]
 
         for record in treatment_df.index:
-            plot_id = int(treatment_df.iloc[record]['Plots_id'])
-            loc_id = int(treatment_df.iloc[record]['Location_id'])
-            seas_id = int(treatment_df.iloc[record["Season_id"]])
-            seeding = treatment_df.iloc[record]['Seeding']
-            fert = treatment_df.iloc[record]['Fert. Treatment']
-            till = treatment_df.iloc[record]['Till. Treatment']
-            self.cur.execute('''INSERT INTO Treatments (
-                        Plots_id,
-                        Location_id,
-                        Season_id,
-                        Seeding,
-                        Fertilizer_Treatment,
-                        Tillage_Treatment)
-                        VALUES (?, ?, ?, ?, ?)''', (
-                        plot_id,
-                        loc_id,
-                        seas_id,
-                        seeding,
-                        fert,
-                        till,)
-                       )
-            self.conn.commit()
+            if treatment_df.iloc[record]["Sampling #"] == 1:
+                plot_id = int(treatment_df.iloc[record]['Plots_id'])
+                loc_id = int(treatment_df.iloc[record]['Location_id'])
+                seas_id = int(treatment_df.iloc[record]["Season_id"])
+                seeding = treatment_df.iloc[record]['Seeding']
+                fert = treatment_df.iloc[record]['Fert. Treatment']
+                till = treatment_df.iloc[record]['Till. Treatment']
+                self.cur.execute('''INSERT INTO Treatments (
+                            Plots_id,
+                            Location_id,
+                            Season_id,
+                            Seeding,
+                            Fertilizer_Treatment,
+                            Tillage_Treatment)
+                            VALUES (?, ?, ?, ?, ?, ?)''', (
+                            plot_id,
+                            loc_id,
+                            seas_id,
+                            seeding,
+                            fert,
+                            till,)
+                            )
+        self.conn.commit()

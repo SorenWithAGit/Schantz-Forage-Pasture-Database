@@ -7,7 +7,7 @@ from src import soilMoisture
 from src import plantData
 from src import rootScan
 
-DB = "Schantz_Pasture_DB.sqlite"
+DB = "Schantz_Forage_DB.sqlite"
 Datasheet = r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\Pasture Study Data, Weights, and Labels.xlsx"
 
 
@@ -44,19 +44,7 @@ Table Plot_Corners.
 """
 # pc = trimbleData.plotCorners(DB)
 # pc.addPlotsAndCorners("Schantz_Temple_Pasture_Plots.csv")
-# pc.addPlotsAndCorners("Schantz Forage Pasture Study (Riesel).csv")56
-
-
-"""
-From module treatments instantiates the class treatments supplied
-with the variable DB.
-The __init__ constructor will make the connection to the Databse.
-The addTreatments function will read from a csv the treatments
-for the corresponding plots and adds the records to the Table
-Treatments
-"""
-# treat = treatments.treatments(DB)
-# treat.addTreatments(Datasheet)
+# pc.addPlotsAndCorners("Schantz Forage Pasture Study (Riesel).csv")
 
 
 """
@@ -69,6 +57,18 @@ to the Table Season.
 """
 # seas = seasons.seasons(DB)
 # seas.addSeasons(Datasheet)
+
+
+"""
+From module treatments instantiates the class treatments supplied
+with the variable DB.
+The __init__ constructor will make the connection to the Databse.
+The addTreatments function will read from a csv the treatments
+for the corresponding plots and adds the records to the Table
+Treatments
+"""
+# treat = treatments.treatments(DB)
+# treat.addTreatments(Datasheet)
 
 
 """
@@ -102,8 +102,8 @@ The addData function will read from the excel file tied to the
 variable Datasheet and adds the gravimetric values of each sampling 
 to the table Plant_Data.
 """
-# plant = plantData.plantData(DB)
-# plant.addData(Datasheet)
+plant = plantData.plantData(DB)
+plant.addData(Datasheet)
 
 
 """

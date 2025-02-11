@@ -72,18 +72,14 @@ class soilMoisture:
         sample_date_results = self.cur.execute(sample_date_query).fetchall()
         sample_date_df = pd.DataFrame(sample_date_results, columns =[description[0] for description in self.cur.description])
         for d in range(len(sample_date_df)):
-            if str(soil_m_df.iloc[d]['Sample Date']) == str(sample_date_df.iloc[d]['Sample_Date']):
+            if str(soil_m_df.iloc[d]['Sample Date']).replace(" 00:00:00", "") == str(sample_date_df.iloc[d]['Sample_Date']):
                 sample_date_id = sample_date_df.iloc[d]['id']
-                    #sample_date = sample_date_df.iloc[d]['Sample_Date']
-                    #print('index = ' + str(soil_m_df.index.get_loc(d)) + ', Sample_date = ' + str(soil_m_df.iloc[d]['Sample Date']) + ' Sample_Date = ' + str(sample_date))
                 Sample_Date_ids.append(sample_date_id)
         soil_m_df['Sample_Date_id'] = Sample_Date_ids
 
         for record in soil_m_df.index:
             for ind in range(len(plots_df)):
                 if soil_m_df.iloc[record]["Location_id"] == plots_df.iloc[ind]["Location_id"] and soil_m_df.iloc[record]['Block #'] == plots_df.iloc[ind]['Block'] and soil_m_df.iloc[record]['Plot #'] == plots_df.iloc[ind]['Plot']:
-                    #print('Success! Block: ' + str(soil_m_df.iloc[record]['Block #']) + ' and Plot: ' + str(soil_m_df.iloc[record]['Plot #']) + ' Found!' + 
-                            #'Plot_id = ' + str(plots_df.iloc[ind]['id']))
                     plot_id = plots_df.iloc[ind]['id'] 
                     Plots_ids.append(plot_id)
         soil_m_df['Plots_id'] = Plots_ids
@@ -92,10 +88,9 @@ class soilMoisture:
         treatments_df = pd.DataFrame(treatments_results, columns=[description[0] for description in self.cur.description])
         for x in soil_m_df.index:
             for y in range(len(treatments_df)):
-                if soil_m_df.iloc[x]["Location_id"] == treatments_df.iloc[y]["Location_id"] and soil_m_df.iloc[x]['Plots_id'] == treatments_df.iloc[y]['Plots_id']:
+                if soil_m_df.iloc[x]["Location_id"] == treatments_df.iloc[y]["Location_id"] and soil_m_df.iloc[x]['Plots_id'] == treatments_df.iloc[y]['Plots_id'] and soil_m_df.iloc[x]['Season_id'] == treatments_df.iloc[y]['Season_id']:
                     treatment_id = treatments_df.iloc[y]['id']
                     Treatments_ids.append(treatment_id)
-                    #print('index = ' + str(soil_m_df.index.get_loc(x)) + ', Plots_id = ' + str(soil_m_df.iloc[x]['Plots_id']) + ' treatment_id = ' + str(treatment_id))
         soil_m_df['Treatments_id'] = Treatments_ids
 
         for sm in soil_m_df.index:

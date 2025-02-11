@@ -17,6 +17,8 @@ class location:
                                        loc,)
                                     )
             self.conn.commit()
+
+
 class plotCorners:
     
     def __init__(self, database):
@@ -123,6 +125,7 @@ class plotCorners:
                         elev,)
                         )   
         self.conn.commit()
+
 
 class samplingPoints:
 

@@ -48,24 +48,6 @@ class plantData:
                     Plots_ids.append(plot_id)
         grass_df['Plots_id'] = Plots_ids
 
-        treatments_results = self.cur.execute(treatments_query).fetchall()
-        treatments_df = pd.DataFrame(treatments_results, columns=[description[0] for description in self.cur.description])
-        for x in grass_df.index:
-            for y in range(len(treatments_df)):
-                if grass_df.iloc[x]["Location_id"] == treatments_df.iloc[y]["Location_id"] and grass_df.iloc[x]['Plots_id'] == treatments_df.iloc[y]['Plots_id']:
-                    treatment_id = treatments_df.iloc[y]['id']
-                    Treatments_ids.append(treatment_id)
-                    #print('index = ' + str(grass_df.index.get_loc(x)) + ', Plots_id = ' + str(grass_df.iloc[x]['Plots_id']) + ' treatment_id = ' + str(treatment_id))
-        grass_df['Treatments_id'] = Treatments_ids
-
-        sample_date_results = self.cur.execute(sample_date_query).fetchall()
-        sample_date_df = pd.DataFrame(sample_date_results, columns =[description[0] for description in self.cur.description])
-        for d in range(len(sample_date_df)):
-            if str(grass_df.iloc[d]['Sample Date']) == str(sample_date_df.iloc[d]['Sample_Date']):
-                sample_date_id = sample_date_df.iloc[d]['id']
-                Sample_Date_ids.append(sample_date_id)
-                #print('index = ' + str(grass_df.index.get_loc(d)) + ', Sample_date = ' + str(grass_df.iloc[d]['Sample Date']) + ' Sample_Date = ' + str(sample_date))
-        grass_df['Sample_Date_id'] = Sample_Date_ids
 
         seasons_results = self.cur.execute(seasons_query).fetchall()
         seasons_df = pd.DataFrame(seasons_results, columns = [description[0] for description in self.cur.description])
@@ -75,6 +57,25 @@ class plantData:
                     season_id = seasons_df.iloc[s]['id']
                     Seasons_ids.append(season_id)
         grass_df['Season_id'] = Seasons_ids
+
+        treatments_results = self.cur.execute(treatments_query).fetchall()
+        treatments_df = pd.DataFrame(treatments_results, columns=[description[0] for description in self.cur.description])
+        for x in grass_df.index:
+            for y in range(len(treatments_df)):
+                if grass_df.iloc[x]["Location_id"] == treatments_df.iloc[y]["Location_id"] and grass_df.iloc[x]['Plots_id'] == treatments_df.iloc[y]['Plots_id'] and grass_df.iloc[x]['Season_id'] == treatments_df.iloc[y]['Season_id']:
+                    treatment_id = treatments_df.iloc[y]['id']
+                    Treatments_ids.append(treatment_id)
+        grass_df['Treatments_id'] = Treatments_ids
+
+        sample_date_results = self.cur.execute(sample_date_query).fetchall()
+        sample_date_df = pd.DataFrame(sample_date_results, columns =[description[0] for description in self.cur.description])
+        for d in range(len(sample_date_df)):
+            if str(grass_df.iloc[d]['Sample Date']).replace(" 00:00:00", "") == str(sample_date_df.iloc[d]['Sample_Date']):
+                sample_date_id = sample_date_df.iloc[d]['id']
+                Sample_Date_ids.append(sample_date_id)
+                #print('index = ' + str(grass_df.index.get_loc(d)) + ', Sample_date = ' + str(grass_df.iloc[d]['Sample Date']) + ' Sample_Date = ' + str(sample_date))
+        grass_df['Sample_Date_id'] = Sample_Date_ids
+
 
         gd_corrected = []
         ng_corrected = []
@@ -112,6 +113,7 @@ class plantData:
         grass_df['Other Dry Weight (g)'] = od_corrected
         grass_df['Litter Dry Weight (g)'] = ld_corrected
         grass_df['Root Dry Weight (g)'] = rd_corrected
+        print(grass_df)
         for dat in grass_df.index:
             plts_id = int(grass_df.iloc[dat]['Plots_id'])
             loc_id = int(grass_df.iloc[dat]["Location_id"])
