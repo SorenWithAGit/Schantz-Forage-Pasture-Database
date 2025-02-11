@@ -71,7 +71,7 @@ class dates:
             plt_id = int(date_df.iloc[entry]['Plots_id'])
             treat_id = int(date_df.iloc[entry]['Treatments_id'])
             ssn_id = int(date_df.iloc[entry]['Season_id'])
-            spl_date = str(date_df.iloc[entry]['Sample Date'])
+            spl_date = str(date_df.iloc[entry]['Sample Date']).replace(" 00:00:00", "")
             locat_id = int(date_df.iloc[entry]['Location_id'])
             self.cur.execute('''INSERT INTO Sampling_Dates (
                         Plots_id,
