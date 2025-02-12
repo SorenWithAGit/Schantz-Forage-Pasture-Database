@@ -113,7 +113,6 @@ class plantData:
         grass_df['Other Dry Weight (g)'] = od_corrected
         grass_df['Litter Dry Weight (g)'] = ld_corrected
         grass_df['Root Dry Weight (g)'] = rd_corrected
-        print(grass_df)
         for dat in grass_df.index:
             plts_id = int(grass_df.iloc[dat]['Plots_id'])
             loc_id = int(grass_df.iloc[dat]["Location_id"])

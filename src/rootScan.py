@@ -66,7 +66,7 @@ class rootScanData:
         treatments_df = pd.DataFrame(treatments_results, columns=[description[0] for description in self.cur.description])
         for x in self.rootScanDF.index:
             for y in range(len(treatments_df)):
-                if self.rootScanDF.iloc[x]["Location_id"] == treatments_df.iloc[y]["Location_id"] and self.rootScanDF.iloc[x]['Plots_id'] == treatments_df.iloc[y]['Plots_id']:
+                if self.rootScanDF.iloc[x]["Location_id"] == treatments_df.iloc[y]["Location_id"] and self.rootScanDF.iloc[x]['Plots_id'] == treatments_df.iloc[y]['Plots_id'] and self.rootScanDF.iloc[x]['Season_id'] == treatments_df.iloc[y]['Season_id']:
                     treatment_id = treatments_df.iloc[y]['id']
                     Treatments_ids.append(treatment_id)
         self.rootScanDF['Treatments_id'] = Treatments_ids
@@ -75,12 +75,13 @@ class rootScanData:
         sample_date_df = pd.DataFrame(sample_date_results, columns =[description[0] for description in self.cur.description])
         for date in self.rootScanDF.index:
             for d in range(len(sample_date_df)):
-                if self.rootScanDF.iloc[date]["Location_id"] == sample_date_df.iloc[d]["Location_id"] and self.rootScanDF.iloc[date]["Plots_id"] == sample_date_df.iloc[d]["Plots_id"] and str(self.rootScanDF.iloc[date]['Date']) == str(sample_date_df.iloc[d]['Sample_Date']):
+                if self.rootScanDF.iloc[date]["Location_id"] == sample_date_df.iloc[d]["Location_id"] and self.rootScanDF.iloc[date]["Plots_id"] == sample_date_df.iloc[d]["Plots_id"] and str(self.rootScanDF.iloc[date]['Date']).replace(" 00:00:00", "") == str(sample_date_df.iloc[d]['Sample_Date']):
                     sample_date_id = sample_date_df.iloc[d]['id']
                         #sample_date = sample_date_df.iloc[d]['Sample_Date']
                         #print('index = ' + str(self.rootScanDF.index.get_loc(d)) + ', Sample_date = ' + str(self.rootScanDF.iloc[d]['Sample Date']) + ' Sample_Date = ' + str(sample_date))
                     Sample_Date_ids.append(sample_date_id)
         self.rootScanDF['Sample_Date_id'] = Sample_Date_ids
+
 
     def addSamples(self):
         for record in self.rootScanDF.index:
