@@ -59,6 +59,7 @@ class createDatabase:
             id INTEGER PRIMARY KEY,
             Plots_id INTEGER REFERENCES Plots (id),
             Location_id INTEGER REFERENCES Location (id),
+            Season_id INTEGER REFERENCES Season (id),
             Treatments_id INTEGER REFERENCES Treatments (id),
             Sample_Date_id INTEGER REFERENCES Sample_date (id),
             latitude FLOAT,

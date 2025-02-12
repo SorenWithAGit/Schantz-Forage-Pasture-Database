@@ -161,6 +161,7 @@ class samplingPoints:
         plots_ids = []
         Treatments_ids = []
         Sample_Date_ids = []
+        Season_ids = []
         
         for r in sampling_points_df.index:
             if str(sampling_points_df.iloc[r]["easting"])[0] == '6':
@@ -176,29 +177,36 @@ class samplingPoints:
                     plots_ids.append(plot_id)
         sampling_points_df['Plots_id'] = plots_ids
 
-        treatments_results = self.cur.execute(treatments_query).fetchall()
-        treatments_df = pd.DataFrame(treatments_results, columns=[description[0] for description in self.cur.description])
-        for x in sampling_points_df.index:
-            for y in range(len(treatments_df)):
-                if sampling_points_df.iloc[x]["Location_id"] == treatments_df.iloc[y]["Location_id"] and sampling_points_df.iloc[x]['Plots_id'] == treatments_df.iloc[y]['Plots_id']:
-                    treatment_id = treatments_df.iloc[y]['id']
-                    Treatments_ids.append(treatment_id)
-        sampling_points_df['Treatments_id'] = Treatments_ids
 
         sample_date_results = self.cur.execute(sample_date_query).fetchall()
         sample_date_df = pd.DataFrame(sample_date_results, columns =[description[0] for description in self.cur.description])
         for date in sampling_points_df['Sample_Date'].index:
             for dte in sample_date_df.index:
-                if sampling_points_df.iloc[date]["Location_id"] == sample_date_df.iloc[dte]["Location_id"] and int(sampling_points_df.iloc[date]['Plots_id']) == int(sample_date_df.iloc[dte]['Plots_id']) and str(sampling_points_df.iloc[date]['Sample_Date']) == str(sample_date_df.iloc[dte]['Sample_Date']):
+                if sampling_points_df.iloc[date]["Location_id"] == sample_date_df.iloc[dte]["Location_id"] and int(sampling_points_df.iloc[date]['Plots_id']) == int(sample_date_df.iloc[dte]['Plots_id']) and str(sampling_points_df.iloc[date]['Sample_Date']).replace(" 00:00:00", "") == str(sample_date_df.iloc[dte]['Sample_Date']):
                     sample_date_id = sample_date_df.iloc[dte]['id']
                     Sample_Date_ids.append(sample_date_id)
+                    season_id = sample_date_df.iloc[dte]['Season_id']
+                    Season_ids.append(season_id)
                 elif sampling_points_df.iloc[date]["Location_id"] == sample_date_df.iloc[dte]["Location_id"] and int(sampling_points_df.iloc[date]['Plots_id']) == int(sample_date_df.iloc[dte]['Plots_id']) and str(sampling_points_df.iloc[date]['Sample_Date']) == "nan":
                     Sample_Date_ids.append("nan")
         sampling_points_df['Sample_Date_id'] = Sample_Date_ids
+        sampling_points_df['Season_id'] = Season_ids
+
+
+        treatments_results = self.cur.execute(treatments_query).fetchall()
+        treatments_df = pd.DataFrame(treatments_results, columns=[description[0] for description in self.cur.description])
+        for x in sampling_points_df.index:
+            for y in range(len(treatments_df)):
+                if sampling_points_df.iloc[x]['Plots_id'] == treatments_df.iloc[y]['Plots_id'] and sampling_points_df.iloc[x]["Location_id"] == treatments_df.iloc[y]["Location_id"] and sampling_points_df.iloc[x]['Season_id'] == treatments_df.iloc[y]['Season_id']:
+                    treatment_id = treatments_df.iloc[y]['id']
+                    Treatments_ids.append(treatment_id)
+        sampling_points_df['Treatments_id'] = Treatments_ids
+
 
         for entry in sampling_points_df.index:
             plot_id = int(sampling_points_df.iloc[entry]['Plots_id'])
             location_id = int(sampling_points_df.iloc[entry]["Location_id"])
+            seas_id = int(sampling_points_df.iloc[entry]['Season_id'])
             treat_id = int(sampling_points_df.iloc[entry]['Treatments_id'])
             smpl_id = int(sampling_points_df.iloc[entry]['Sample_Date_id'])
             lat = float(sampling_points_df.iloc[entry]['latitude'])
@@ -209,6 +217,7 @@ class samplingPoints:
             self.cur.execute('''INSERT INTO Sampling_Points (
                         Plots_id,
                         Location_id,
+                        Season_id,
                         Treatments_id,
                         Sample_Date_id,
                         latitude,
@@ -216,9 +225,10 @@ class samplingPoints:
                         northing,
                         easting,
                         elevation)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)''', (
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''', (
                         plot_id,
                         location_id,
+                        seas_id,
                         treat_id,
                         smpl_id,
                         lat,
@@ -227,4 +237,4 @@ class samplingPoints:
                         east,
                         elev,)
                        )
-            self.conn.commit()
+        self.conn.commit()

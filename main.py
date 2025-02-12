@@ -102,8 +102,8 @@ The addData function will read from the excel file tied to the
 variable Datasheet and adds the gravimetric values of each sampling 
 to the table Plant_Data.
 """
-plant = plantData.plantData(DB)
-plant.addData(Datasheet)
+# plant = plantData.plantData(DB)
+# plant.addData(Datasheet)
 
 
 """
@@ -114,8 +114,8 @@ The addSamplingPoints function will read from the .CSV file supplied as a
 paramater and adds the geographic coordinates to the Table 
 Sampling_Points
 """
-# points = trimbleData.samplingPoints(DB)
-# points.addSamplingPoints(r)
+points = trimbleData.samplingPoints(DB)
+points.addSamplingPoints(r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\GIS - Pasture Study Sampling Points\Temple Sampling Points\TWi24_CSVFiles\TWi24_S2 Sampling Points.csv")
 
 
 """
