@@ -114,21 +114,21 @@ The addSamplingPoints function will read from the .CSV file supplied as a
 paramater and adds the geographic coordinates to the Table 
 Sampling_Points
 """
-TSu24S1 = trimbleData.samplingPoints(DB)
-TSu24S1.addSamplingPoints(r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\GIS - Pasture Study Sampling Points\Temple Sampling Points\TSu24_CSVfiles\TSu24_S1 Sampling Points.csv")
-TSu24S2 = trimbleData.samplingPoints(DB)
-TSu24S2.addSamplingPoints(r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\GIS - Pasture Study Sampling Points\Temple Sampling Points\TSu24_CSVfiles\TSu24_S2 Sampling Points.csv")
-TSu24S3 = trimbleData.samplingPoints(DB)
-TSu24S3.addSamplingPoints(r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\GIS - Pasture Study Sampling Points\Temple Sampling Points\TSu24_CSVfiles\TSu24_S3 Sampling Points.csv")
-TSu24S4 = trimbleData.samplingPoints(DB)
-TSu24S4.addSamplingPoints(r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\GIS - Pasture Study Sampling Points\Temple Sampling Points\TSu24_CSVfiles\TSu24_S4 Sampling Points.csv")
-TWi24S1 = trimbleData.samplingPoints(DB)
-TWi24S1.addSamplingPoints(r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\GIS - Pasture Study Sampling Points\Temple Sampling Points\TWi24_CSVFiles\TWi24_S1 Sampling Points.csv")
-TWi24S2 = trimbleData.samplingPoints(DB)
-TWi24S2.addSamplingPoints(r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\GIS - Pasture Study Sampling Points\Temple Sampling Points\TWi24_CSVFiles\TWi24_S2 Sampling Points.csv")
+# TSu24S1 = trimbleData.samplingPoints(DB)
+# TSu24S1.addSamplingPoints(r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\GIS - Pasture Study Sampling Points\Temple Sampling Points\TSu24_CSVfiles\TSu24_S1 Sampling Points.csv")
+# TSu24S2 = trimbleData.samplingPoints(DB)
+# TSu24S2.addSamplingPoints(r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\GIS - Pasture Study Sampling Points\Temple Sampling Points\TSu24_CSVfiles\TSu24_S2 Sampling Points.csv")
+# TSu24S3 = trimbleData.samplingPoints(DB)
+# TSu24S3.addSamplingPoints(r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\GIS - Pasture Study Sampling Points\Temple Sampling Points\TSu24_CSVfiles\TSu24_S3 Sampling Points.csv")
+# TSu24S4 = trimbleData.samplingPoints(DB)
+# TSu24S4.addSamplingPoints(r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\GIS - Pasture Study Sampling Points\Temple Sampling Points\TSu24_CSVfiles\TSu24_S4 Sampling Points.csv")
+# TWi24S1 = trimbleData.samplingPoints(DB)
+# TWi24S1.addSamplingPoints(r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\GIS - Pasture Study Sampling Points\Temple Sampling Points\TWi24_CSVFiles\TWi24_S1 Sampling Points.csv")
+# TWi24S2 = trimbleData.samplingPoints(DB)
+# TWi24S2.addSamplingPoints(r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\GIS - Pasture Study Sampling Points\Temple Sampling Points\TWi24_CSVFiles\TWi24_S2 Sampling Points.csv")
 
-RWi24S1 = trimbleData.samplingPoints(DB)
-RWi24S1.addSamplingPoints(r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\GIS - Pasture Study Sampling Points\Riesel Sampling Points\RWi24_CSVFiles\RWi24_S1 Sampling Points.csv")
+# RWi24S1 = trimbleData.samplingPoints(DB)
+# RWi24S1.addSamplingPoints(r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\GIS - Pasture Study Sampling Points\Riesel Sampling Points\RWi24_CSVFiles\RWi24_S1 Sampling Points.csv")
 
 """
 From module rootScan instantiates the class rootScanData supplied
@@ -141,9 +141,9 @@ Names to the Table Root_Scan_Samples.
 The addResults function will take the DataFrame and add the measured
 values to the Table Root_Scan_Data.
 """
-TSu24S3Root = rootScan.rootScanData(DB, r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\Root Scans\Temple\TSu24_S3_rootscan\TSu24_S3_rootscan_processed.xlsx")
-TSu24S3Root.addSamples()
-TSu24S3Root.addResults()
-TSu24S4Root = rootScan.rootScanData(DB, r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\Root Scans\Temple\TSu24_S4_rootscan\TSu24_S4_rootscan_processed.xlsx")
-TSu24S4Root.addSamples()
-TSu24S4Root.addResults()
+# TSu24S3Root = rootScan.rootScanData(DB, r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\Root Scans\Temple\TSu24_S3_rootscan\TSu24_S3_rootscan_processed.xlsx")
+# TSu24S3Root.addSamples()
+# TSu24S3Root.addResults()
+# TSu24S4Root = rootScan.rootScanData(DB, r"C:\Users\john.sorensen\Box\Schantz Group Shared Data\Pasture Study\Root Scans\Temple\TSu24_S4_rootscan\TSu24_S4_rootscan_processed.xlsx")
+# TSu24S4Root.addSamples()
+# TSu24S4Root.addResults()
